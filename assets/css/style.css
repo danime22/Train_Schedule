@@ -1,0 +1,38 @@
+* {
+    font-family: 'Merienda', cursive;
+}
+body {
+    background-image: url("../images/50-Beautiful-and-Minimalist-Presentation-Backgrounds-019.jpg");
+    background-position: center;
+    background-size: 500%;
+    background-repeat: no-repeat;
+   
+}
+
+td, tr {
+    color: white;
+}
+
+span {
+    color: white;
+}
+
+label{
+    color: white;
+    font-size: 22px;
+}
+
+.jumbotron {
+ background-image: url("../images/mdb_22990_ice_3_schnellfahrstrecke_nuernberg_-_ingolstadt_1000x500_cp_0x144_1000x644.jpg");
+ background-position: center;
+ background-repeat: no-repeat;
+ background-size: cover;
+}
+
+.p {
+    background-color: aquamarine;
+}
+form {
+    border: 0px solid black;
+  
+}

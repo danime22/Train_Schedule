@@ -54,7 +54,7 @@
         var difference = moment().diff(moment(trainTime), "minutes");
         var trainRemain = difference % frequency;
         var minUntil = frequency - trainRemain;
-        var nextArrival = moment().add(minUntil).format("hh:mm" + "A");
+        var nextArrival = moment().add(minUntil).format("hh:mm " + " A");
 
         $("#trainTable > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" + nextArrival + "</td><td>" + minUntil + "</td></tr>");
 
