@@ -50,8 +50,12 @@
         var firstTime = childSnapshot.val().trainComing;
         var frequency = childSnapshot.val().everyMin;
 
+        console.log(frequency);
+
         var trainTime = moment.unix(firstTime).format("hh:mm");
-        var difference = moment().diff(moment(trainTime), "minutes");
+        console.log(trainTime);
+        var difference = moment().diff(moment(firstTime,"X"), "minutes");
+        console.log(difference);
         var trainRemain = difference % frequency;
         var minUntil = frequency - trainRemain;
         var nextArrival = moment().add(minUntil).format("hh:mm " + " A");

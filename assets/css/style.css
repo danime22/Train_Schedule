@@ -19,7 +19,7 @@ span {
 
 label{
     color: white;
-    font-size: 22px;
+    font-size: 20px;
 }
 
 .jumbotron {
@@ -31,8 +31,10 @@ label{
 
 .p {
     background-color: aquamarine;
+    color: white;
 }
 form {
     border: 0px solid black;
   
 }
+
