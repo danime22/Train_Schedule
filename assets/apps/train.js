@@ -1,47 +1,65 @@
-var config = {
-    apiKey: "AIzaSyBSEpjYV195KRt2qrjCcOlibUsMjl66VO0",
-    authDomain: "train-time-de3aa.firebaseapp.com",
-    databaseURL: "https://train-time-de3aa.firebaseio.com",
-    projectId: "train-time-de3aa",
-    storageBucket: "",
-    messagingSenderId: "323048788649"
-};
-firebase.initializeApp(config);
 
-var database = firebase.database();
+    var config = {
+        apiKey: "AIzaSyBSEpjYV195KRt2qrjCcOlibUsMjl66VO0",
+        authDomain: "train-time-de3aa.firebaseapp.com",
+        databaseURL: "https://train-time-de3aa.firebaseio.com",
+        projectId: "train-time-de3aa",
+        storageBucket: "",
+        messagingSenderId: "323048788649"
+    };
+    firebase.initializeApp(config);
 
-var name = "";
-var destination = "";
-var time = 0;
-var min = 0;
+    var database = firebase.database();
 
-$("#submit").on("click", function (event) {
-    event.preventDefault();
+    $("#submit").on("click", function(event){
+        event.preventDefault();
+        console.log("hey");
 
-    name = $("#name-input").val().trim();
-    destination = $("#destination-input").val().trim();
-    time = $("#time-input").val().trim();
-    min = $("#min-input").val().trim();
+        var trainName = $("#name-input").val().trim();
+        var trainDestination = $("#destination-input").val().trim();
 
-    database.ref().set({
-        name: name,
-        destination: destination,
-        time: time,
-        min: min
+        var firstTime = moment($("#time-input").val().trim(), "hh:mm").subtract(1, "years").format("X");
+        var frequency = $("#min-input").val().trim();
+
+        var currentTime= moment();
+        console.log("current time: " + moment(currentTime).format("hh:mm"));
+
+        var newTrain = {
+            train: trainName,
+            trainGoing: trainDestination,
+            trainComing: firstTime,
+            everyMin: frequency
+        };
+
+        database.ref().push(newTrain);
+
+        $("#name-input").val();
+        $("#destination-input").val();
+        $("#time-input").val();
+        $("#min-input").val();
+
+        // return false;
+
     });
 
+    database.ref().on("child_added", function(childSnapshot){
+        console.log(childSnapshot.val());
 
-});
+        var trainName = childSnapshot.val().train;
+        var destination = childSnapshot.val().trainGoing;
+        var firstTime = childSnapshot.val().trainComing;
+        var frequency = childSnapshot.val().everyMin;
 
-database.ref().on("value", function (snapshot) {
-    console.log(snapshot.val());
-    $("#name-display").text(snapshot.val().name);
-    $("#destination-display").text(snapshot.val().destination);
-    $("#time-display").text(snapshot.val().time);
-    $("#min-display").text(snapshot.val().min);
+        var trainTime = moment.unix(firstTime).format("hh:mm");
+        var difference = moment().diff(moment(trainTime), "minutes");
+        var trainRemain = difference % frequency;
+        var minUntil = frequency - trainRemain;
+        var nextArrival = moment().add(minUntil).format("hh:mm" + "A");
 
-    console.log(snapshot);
-})
+        $("#trainTable > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" + nextArrival + "</td><td>" + minUntil + "</td></tr>");
+
+    });
+
 
 
 
