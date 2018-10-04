@@ -15,6 +15,8 @@ td, tr {
 
 span {
     color: white;
+    font-size: 34px;
+    background-color: #31266D;
 }
 
 label{
@@ -30,11 +32,18 @@ label{
 }
 
 .p {
-    background-color: aquamarine;
+    background-color: #31266D;
     color: white;
+    font-size: 34px;
 }
 form {
     border: 0px solid black;
   
+}
+
+.text-center {
+    color: #E15050;
+    font-size: 100px;
+    font-family: 'Ultra', serif;
 }
 
