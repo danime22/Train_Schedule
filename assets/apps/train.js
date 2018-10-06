@@ -15,6 +15,7 @@
         event.preventDefault();
         console.log("hey");
 
+
         var trainName = $("#name-input").val().trim();
         var trainDestination = $("#destination-input").val().trim();
 
@@ -33,12 +34,13 @@
 
         database.ref().push(newTrain);
 
-        $("#name-input").val();
-        $("#destination-input").val();
-        $("#time-input").val();
-        $("#min-input").val();
+        $("#name-input").val("");
+        $("#destination-input").val("");
+        $("#time-input").val("");
+        $("#min-input").val("");
 
         // return false;
+        
 
     });
 
