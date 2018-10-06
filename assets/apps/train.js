@@ -45,22 +45,31 @@
     });
 
     database.ref().on("child_added", function(childSnapshot){
-        console.log(childSnapshot.val());
+        console.log("child" + childSnapshot.val());
 
         var trainName = childSnapshot.val().train;
+        console.log("trainName" + trainName);
         var destination = childSnapshot.val().trainGoing;
+        console.log("destination" + destination);
         var firstTime = childSnapshot.val().trainComing;
+        console.log("firstTime" + firstTime);
         var frequency = childSnapshot.val().everyMin;
+        console.log("frequency" + frequency);
 
         console.log(frequency);
 
-        var trainTime = moment.unix(firstTime).format("hh:mm");
-        console.log(trainTime);
+        var trainTime = moment(firstTime, "X").format("hh:mm");
+        console.log("trainTime" +trainTime);
+        // var currentTime = moment();
         var difference = moment().diff(moment(firstTime,"X"), "minutes");
-        console.log(difference);
+        console.log("hey" + difference);
         var trainRemain = difference % frequency;
+        console.log("trainReName" + trainRemain);
         var minUntil = frequency - trainRemain;
-        var nextArrival = moment().add(minUntil).format("hh:mm " + " A");
+        console.log("minUntil" + minUntil);
+        var nextArrival = moment().add(minUntil, "minutes");
+        nextArrival=nextArrival.format("hh:mm A")
+        console.log("next" + nextArrival);
 
         $("#trainTable > tbody").append("<tr><td>" + trainName + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" + nextArrival + "</td><td>" + minUntil + "</td></tr>");
 
